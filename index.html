@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生日祝福模板</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <div class="loader__wrap">
+      <i class="loader__hint" id="loaderHint">准备中</i>
+      <a class="loader__enter" href="#" id="enterBtn">进入</a>
+    </div>
+    <span class="loader__bar" id="loaderBar"></span>
+  </div>
+
+  <div class="stage" id="stage">
+    <canvas id="scene"></canvas>
+  </div>
+
+  <header class="header">
+    <div class="header__inner">
+      <a class="header__brand" href="#">生日快乐</a>
+      <span class="header__date" id="todayDate"></span>
+    </div>
+  </header>
+
+  <!-- Stage indicator (left side) -->
+  <aside class="stages" id="stages" aria-label="scene progress">
+    <!-- dots populated by JS -->
+  </aside>
+
+  <!-- Bottom caption (current stage title) -->
+  <div class="caption" id="caption">
+    <span class="caption__index" id="capIndex">00</span>
+    <h2 class="caption__title" id="capTitle">灯光暗下</h2>
+    <p class="caption__desc"  id="capDesc">向下滚动开始</p>
+  </div>
+
+  <!-- Bottom-right scroll hint -->
+  <div class="hint" id="scrollHint">
+    <span class="hint__keys">滚动 · 方向键 · 空格</span>
+    <span class="hint__arrow">↓</span>
+  </div>
+
+  <!-- Blow-out overlay (only visible at final stage) -->
+  <div class="blow" id="blow">
+    <div class="blow__ring" id="blowRing">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="46" class="blow__track"/>
+        <circle cx="50" cy="50" r="46" class="blow__fill" id="blowFill"/>
+      </svg>
+    </div>
+    <p class="blow__hint">按住吹灭蜡烛</p>
+  </div>
+
+  <!-- Wish toast (吹灭瞬间弹出，先于 finale) -->
+  <div class="wish" id="wish" aria-hidden="true">
+    <span class="wish__star">✦</span>
+    <p class="wish__text">愿岁岁有今朝，愿来年胜旧年</p>
+    <span class="wish__star">✦</span>
+  </div>
+
+  <!-- Final celebration title (after blow) -->
+  <div class="finale" id="finale">
+    <p class="finale__kicker">— 心愿已许 —</p>
+    <h1 class="finale__title finale__title--name">
+      <span>{{RECIPIENT_NAME}}生日快乐</span>
+    </h1>
+    <p class="finale__name">{{BIRTHDAY_DATE}}</p>
+    <button class="finale__replay" id="replayBtn">重来一次 ↺</button>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span class="footer__credit">用心制作</span>
+      <button class="footer__audio" id="audioToggle" type="button" aria-label="Toggle music" aria-pressed="false">
+        <svg viewBox="0 0 10 10" width="22" height="22" aria-hidden="true">
+          <polyline id="audioWave" points="1,5 2.5,5 4,5 5.5,5 7,5 8.5,5" fill="none" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </footer>
+
+  <audio id="bgm" src="./music/bgm.mp3" loop preload="auto"></audio>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
